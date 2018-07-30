@@ -14,7 +14,7 @@
                 <asp:GridView ID="gv_cart" CssClass="highlight" runat="server" AutoGenerateColumns="False" DataKeyNames="ItemID" OnRowCommand="gv_cart_RowCommand">
                     <Columns>
 
-                        <asp:ImageField HeaderText="Image" AlternateText="Image not found" ControlStyle-Width="100" ControlStyle-Height="100" DataImageUrlField="Product_Image">                   
+                        <asp:ImageField  AlternateText="Image not found" ControlStyle-Width="178" ControlStyle-Height="100" DataImageUrlField="Product_Image">                   
                         </asp:ImageField>
 
                         <asp:TemplateField HeaderText="My Bag">
@@ -30,7 +30,7 @@
 
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Product_Price" DataFormatString="{0:C}" HeaderText="Price">
+                        <asp:BoundField DataField="Product_Price" DataFormatString="{0:C}" HtmlEncode="false" HeaderText="Price">
 
                             <ItemStyle CssClass="" ForeColor="#EF6C00" />
                         </asp:BoundField>

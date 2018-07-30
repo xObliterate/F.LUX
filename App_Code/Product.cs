@@ -35,17 +35,18 @@ public class Product
         this.shortDesc = shortDesc;
         this.price = price;
     }
-    public Product(string prodID, string prodName, string shortDesc, decimal price)
+    //public Product(string prodID, string prodName, string shortDesc, decimal price)
+    //{
+    //    this.prodID = prodID;
+    //    this.prodName = prodName;
+    //    this.shortDesc = shortDesc;
+    //    this.price = price;
+    //}
+
+    public Product(string prodName, string shortDesc, int quantity, decimal price)
     {
-        this.prodID = prodID;
         this.prodName = prodName;
         this.shortDesc = shortDesc;
-        this.price = price;
-    }
-
-    public Product(string prodName, int quantity, decimal price)
-    {
-        this.prodName = prodName;
         this.quantity = quantity;
         this.price = price;
     }
@@ -172,13 +173,19 @@ public class Product
 
     public int productDelete(string id)
     {
-        string queryStr = "DELETE FROM Product WHERE pID = @pID";
+        string queryStr = "";
+        queryStr = "DELETE FROM ProductImage WHERE pID = @pID";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
         cmd.Parameters.AddWithValue("@pID", id);
         con.Open();
         int nofRow = 0;
         nofRow = cmd.ExecuteNonQuery();
+
+        queryStr = "DELETE FROM Product WHERE pID = @pID";
+        cmd = new SqlCommand(queryStr, con);
+        cmd.Parameters.AddWithValue("@pID", id);
+        nofRow += cmd.ExecuteNonQuery();
         con.Close();
         return nofRow;
     }
@@ -227,7 +234,7 @@ public class Product
     public int productImageInsert()
     {
         int result = 0;
-        string queryStr = "INSERT INTO ProductImage(pID, pImage) VALUES((SELECT COUNT(*) FROM Product), @pImage)";
+        string queryStr = "INSERT INTO ProductImage(pID, pImage) VALUES((SELECT MAX(pID) FROM Product), @pImage)";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
         cmd.Parameters.AddWithValue(@"pImage", this.image);
@@ -254,7 +261,7 @@ public class Product
         {
             prodID = dr["pID"].ToString();
             prodName = dr["pName"].ToString();
-            prodImage =  dr["pImage"].ToString();
+            prodImage = dr["pImage"].ToString();
             prodDesc = dr["pShortDesc"].ToString();
             price = decimal.Parse(dr["pPrice"].ToString());
 
@@ -303,8 +310,11 @@ public class Product
 
         return prodList;
     }
+
     public List<Product> getAllPopProd()
     {
+        //p.pStatus 0 = pending, 1 = approved, 2 = rejected
+
         List<Product> prodList = new List<Product>();
         string prodID, pname, pimage, pshortDesc;
         decimal price;

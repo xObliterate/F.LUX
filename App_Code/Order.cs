@@ -50,14 +50,14 @@ public class Order
         // 0 = pending, 1 = received, 2 = shipping, 3 = delivered
         int result = 0;
 
-        string queryStr = "INSERT INTO Order(cID, aBookID, payment, orderDate, orderStatus, shipFee) VALUES(@cID, @aBookID, (SELECT COUNT(*) FROM Payment), @orderDate, @orderStatus, @shipFee)";
+        string queryStr = "INSERT INTO [Order] (cID, aBookId, payment, orderDate, shipFee) VALUES(@cID, (SELECT aBookId FROM AddressBook WHERE cID = @cID and primaryAddress = 1), (SELECT paymentID FROM Payment WHERE cID = @cID), @orderDate, @shipFee)";
+
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
 
         cmd.Parameters.AddWithValue("@cID", id);
         cmd.Parameters.AddWithValue("@aBookId", abookid);
         cmd.Parameters.AddWithValue("@orderDate", DateTime.Now);
-        cmd.Parameters.AddWithValue("@orderStatus", 0);
         cmd.Parameters.AddWithValue("@shipFee", shipfee);
 
         con.Open();

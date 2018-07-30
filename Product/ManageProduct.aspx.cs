@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
+using System.IO;
 
 public partial class ManageProduct : System.Web.UI.Page
 {
@@ -22,7 +23,7 @@ public partial class ManageProduct : System.Web.UI.Page
             }
             else
             {
-                Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Session timeout!');window.location = 'Index.aspx';", true);
+                Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Session timeout!');window.location = '/Index.aspx';", true);
             }
         }
     }
@@ -132,6 +133,7 @@ public partial class ManageProduct : System.Web.UI.Page
         {
             lbl_msg.Text = "Product is NOT remove";
         }
+        bind();
     }
 
     protected void btn_search_Click(object sender, EventArgs e)

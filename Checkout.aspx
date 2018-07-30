@@ -6,14 +6,15 @@
     <div class="container">
         <div class="row">
             <div class="col s6">
-                <div class="container1 white z-depth-2">
-                    <ul class="tabs teal center">
-                        <li class="tab col s6"><a class="white-text">Checkout</a></li>
-                    </ul>
-                    <div class="col s12">
-                        <div class="form-container">
-                            <h4>Debit / Credit</h4>
-                            <asp:Panel ID="paymentPanel" runat="server" DefaultButton="btn_submit">
+                <asp:Panel ID="paymentPanel" runat="server" DefaultButton="btn_submit">
+
+                    <div class="container1 white z-depth-2">
+                        <ul class="tabs teal center">
+                            <li class="tab col s6"><a class="white-text">Checkout</a></li>
+                        </ul>
+                        <div class="col s12">
+                            <div class="form-container">
+                                <h4>Debit / Credit</h4>
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <asp:TextBox ID="tb_CardNumber" runat="server" MaxLength="16"></asp:TextBox>
@@ -46,14 +47,15 @@
                                     </div>
                                 </div>
                                 <div class="center">
-                                    <asp:Button ID="btn_submit" CssClass="btn" runat="server" Text="Submit" OnClick="btn_submit_Click"></asp:Button>
+                                    <asp:Button ID="btn_submit" CssClass="btn" runat="server" Text="Add" OnClick="btn_submit_Click"></asp:Button>
                                 </div>
-                            </asp:Panel>
-                            <asp:LinkButton ID="linkbtn_stripe" runat="server" CausesValidation="False"><i class="fab fa-cc-stripe fa-3x"></i></asp:LinkButton>
 
+                                <asp:LinkButton ID="linkbtn_stripe" runat="server" CausesValidation="False"><i class="fab fa-cc-stripe fa-3x"></i></asp:LinkButton>
+
+                            </div>
                         </div>
                     </div>
-                </div>
+                </asp:Panel>
             </div>
 
             <div class="col s6">
@@ -73,6 +75,14 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <asp:Label ID="lbl_summary" runat="server"></asp:Label>
+                            </div>
+                        </div>
+                        <hr />
+                        <h4>Payment Info</h4>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <asp:Label ID="lbl_payment" runat="server"></asp:Label>
+                                <asp:Button ID="btn_pay" CssClass="btn right" Text="Pay" runat="server" OnClick="btn_pay_Click" />
                             </div>
                         </div>
                     </div>
