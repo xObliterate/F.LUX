@@ -9,6 +9,7 @@ public partial class Index : System.Web.UI.Page
 {
     Product prod = null;
     Account acc = null;
+    ShoppingCartItem sci = null;
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -39,19 +40,54 @@ public partial class Index : System.Web.UI.Page
     {
         acc = (Account)Session["Id"];
         Product p = new Product();
+        Button btn = (Button)sender;
+        RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+        HiddenField idField = (HiddenField)item.FindControl("lbl_popID");
+        string prodID = idField.Value;
+        prod = p.getProduct(prodID);
+
         if (acc != null)
         {
-            Button btn = (Button)sender;
-            RepeaterItem item = (RepeaterItem)btn.NamingContainer;
-            HiddenField idField = (HiddenField)item.FindControl("lbl_popID");
+            List<ShoppingCartItem> scList = new List<ShoppingCartItem>();
+            ShoppingCartItem sc = new ShoppingCartItem();
 
-            string prodID = idField.Value;
-            prod = p.getProduct(prodID);
-            ShoppingCart.Instance.AddItem(prodID, prod); 
+            scList = sc.getAllCartItem(acc.gsID);
+            if (scList.Count == 0)
+            {
+                sc.insertCart(acc.gsID, prodID, prod.gsPrice);
+            }
+            else
+            {
+                for (int i = 0; i < scList.Count; i++)
+                {
+                    if (!(scList[i].ItemID.Equals(prodID)))
+                    {
+                        sci = sc.getCartItem(acc.gsID, prodID);
+                        if (sci != null)
+                        {
+                            int quantity = sci.Product_Quantity;
+                            decimal finalprice = prod.gsPrice;
+                            sc.updateCart(acc.gsID, int.Parse(sci.ItemID), quantity, finalprice += sci.Product_FinalPrice);
+                            break;
+                        }
+                        else
+                        {
+                            sc.insertCart(acc.gsID, prodID, prod.gsPrice);
+                        }
+                    }
+                    else
+                    {
+                        int quantity = scList[i].Product_Quantity;
+                        decimal finalprice = prod.gsPrice;
+                        sc.updateCart(acc.gsID, int.Parse(scList[i].ItemID), quantity, finalprice += scList[i].Product_FinalPrice);
+                        break;
+                    }
+                }
+            }
         }
         else
         {
-
+            ShoppingCart.Instance.AddItem(prodID, prod);
         }
     }
     protected void linkbtn_info_Click(object sender, EventArgs e)

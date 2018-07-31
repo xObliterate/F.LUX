@@ -15,7 +15,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         if (acc == null)
         {
-            Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Session timeout');window.location = 'Index.aspx';", true);
+            Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Session timeout');window.location = '/Index.aspx';", true);
         }
         else
         {
