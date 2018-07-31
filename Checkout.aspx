@@ -75,6 +75,12 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <asp:Label ID="lbl_summary" runat="server"></asp:Label>
+            <%--                    <asp:Label ID="lbl_prodname" runat="server"></asp:Label>
+                                <br />
+                                <asp:Label ID="lbl_prodquantity" runat="server"></asp:Label>
+                                <br />
+                                <asp:Label ID="lbl_prodprice" runat="server"></asp:Label>
+                                <br />--%>
                             </div>
                         </div>
                         <hr />

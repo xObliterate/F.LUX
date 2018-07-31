@@ -49,15 +49,18 @@ public partial class Checkout : System.Web.UI.Page
 
             order = (Order)Session["order"];
 
-            //List<Product> prodlist = (List<Product>)Session["o"];
-            //var list = (List<Product>)Session["o"];
             //IEnumerable<Product> a = Session["o"] as IEnumerable<Product>;
-            //foreach (Product p in prodlist)
+
+            //List<Product> prodlist = (List<Product>)Session["o"];
+            //foreach (Product pd in prodlist)
             //{
-            //    lbl_summary.Text = string.Format("{0} <br/> {1} <br/> {2}", p.gsProdName, p.gsQuantity, p.gsPrice);
+            //     lbl_summary.Text += string.Format("{0} <br/> {1} <br/> {2}", pd.gsProdName, pd.gsQuantity, pd.gsPrice);
+            //    lbl_prodname.Text += string.Format("{0},", pd.gsProdName);
+            //    lbl_prodquantity.Text += string.Format(" {0},", pd.gsQuantity);
+            //    lbl_prodprice.Text += string.Format("{0},", pd.gsPrice);
             //}
 
-            lbl_summary.Text = string.Format("{0} <br/> Shipping Fee ${1} <br/> {2}", order.gssubtotal, order.gsshippingfee, order.gstotal);
+             lbl_summary.Text = string.Format("{0} <br/> Shipping Fee ${1} <br/> {2}", order.gssubtotal, order.gsshippingfee, order.gstotal);
         }
 
 
@@ -80,7 +83,7 @@ public partial class Checkout : System.Web.UI.Page
         order.insertOrder(cID, add.gsAbID, decimal.Parse(order.gsshippingfee));
 
         //iterate product properties
-       // order.insertOrderProduct();
+        // order.insertOrderProduct();
     }
 
     protected void ccVlidator_ServerValidate(object source, ServerValidateEventArgs args)

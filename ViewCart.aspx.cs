@@ -103,23 +103,23 @@ public partial class ViewCart : System.Web.UI.Page
 
     protected void btn_checkout_Click(object sender, EventArgs e)
     {
-        //List<Product> list = new List<Product>();
-        //foreach (GridViewRow row in gv_cart.Rows)
-        //{
-        //    Label lbname = (Label)row.FindControl("lbl_prodname");
-        //    Label lbdesc = (Label)row.FindControl("lbl_proddesc");
-        //    TextBox tbquantity = (TextBox)row.FindControl("tb_quantity");
+        List<Product> list = new List<Product>();
+        foreach (GridViewRow row in gv_cart.Rows)
+        {
+            Label lbname = (Label)row.FindControl("lbl_prodname");
+            Label lbdesc = (Label)row.FindControl("lbl_proddesc");
+            TextBox tbquantity = (TextBox)row.FindControl("tb_quantity");
 
-        //    string name = lbname.Text;
-        //    string desc = lbdesc.Text;
-        //    string quantity = tbquantity.Text;
-        //    string price = row.Cells[2].Text;
-        //    price = price.Replace("$", string.Empty);
+            string name = lbname.Text;
+            string desc = lbdesc.Text;
+            string quantity = tbquantity.Text;
+            string price = row.Cells[2].Text;
+            price = price.Replace("$", string.Empty);
 
-        //    Product p = new Product(name, desc, int.Parse(quantity), decimal.Parse(price));
-        //    list.Add(p);
-        //}
-        //Session["o"] = list;
+            Product p = new Product(name, desc, int.Parse(quantity), decimal.Parse(price));
+            list.Add(p);
+        }
+        Session["o"] = list;
 
         Response.Redirect("Checkout.aspx");
     }

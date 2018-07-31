@@ -87,22 +87,23 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
     {
 
     }
-    //public int insertCart(int id, string prodID, int quantity, decimal total)
-    //{
-    //    int result = 0;
+    
+    public int insertCart(int id, string prodID, int quantity, decimal total)
+    {
+        int result = 0;
 
-    //    string queryStr = "INSERT INTO CustomerCart(cID, pID, quantity, finalPrice) VALUES(@cID, @pID, @quantity, @finalPrice)";
-    //    SqlConnection con = new SqlConnection(connStr);
-    //    SqlCommand cmd = new SqlCommand(queryStr, con);
+        string queryStr = "INSERT INTO CustomerCart(cID, pID, quantity, finalPrice) VALUES(@cID, @pID, @quantity, @finalPrice)";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
 
-    //    cmd.Parameters.AddWithValue("@cID", id);
-    //    cmd.Parameters.AddWithValue("@pID", prodID);
-    //    cmd.Parameters.AddWithValue("@quantity", quantity);
-    //    cmd.Parameters.AddWithValue("@finalPrice", total);
+        cmd.Parameters.AddWithValue("@cID", id);
+        cmd.Parameters.AddWithValue("@pID", prodID);
+        cmd.Parameters.AddWithValue("@quantity", quantity);
+        cmd.Parameters.AddWithValue("@finalPrice", total);
 
-    //    con.Open();
-    //    result += cmd.ExecuteNonQuery();
-    //    con.Close();
-    //    return result;
-    //}
+        con.Open();
+        result += cmd.ExecuteNonQuery();
+        con.Close();
+        return result;
+    }
 }
