@@ -17,7 +17,8 @@ public partial class Checkout : System.Web.UI.Page
         acc = (Account)Session["Id"];
         if (acc == null)
         {
-            Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Session timeout');window.location = 'Index.aspx';", true);
+            Response.Redirect("/Login/Login.aspx");
+            //Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Please Login To Checkout');window.location = 'Index.aspx';", true);
         }
         else
         {

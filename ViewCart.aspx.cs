@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 public partial class ViewCart : System.Web.UI.Page
 {
+    ShoppingCartItem sc = new ShoppingCartItem();
+    Account acc = new Account();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!(IsPostBack))
@@ -25,18 +28,15 @@ public partial class ViewCart : System.Web.UI.Page
         {
             case "Remove":
                 ShoppingCart.Instance.RemoveItem(pID);
-                LoadCart();
                 break;
 
             case "Favourite":
                 ShoppingCart.Instance.RemoveItem(pID);
-                LoadCart();
                 break;
 
             case "Minus":
                 quantity--;
                 ShoppingCart.Instance.SetItemQuantity(pID, quantity);
-                LoadCart();
                 break;
 
             case "Add":
@@ -50,16 +50,28 @@ public partial class ViewCart : System.Web.UI.Page
                 {
                     quantity++;
                     ShoppingCart.Instance.SetItemQuantity(pID, quantity);
-                    LoadCart();
                 }
                 break;
         }
+        LoadCart();
     }
 
     protected void LoadCart()
     {
-        gv_cart.DataSource = ShoppingCart.Instance.Items;
-        gv_cart.DataBind();
+        acc = (Account)Session["Id"];
+        if (acc != null)
+        {
+            int id = acc.gsID;
+            List<ShoppingCartItem> scList = new List<ShoppingCartItem>();
+            scList = sc.getAllCartItem(id);
+            gv_cart.DataSource = scList;
+            gv_cart.DataBind();
+        }
+        else
+        {
+            gv_cart.DataSource = ShoppingCart.Instance.Items;
+            gv_cart.DataBind();
+        }
 
         decimal total = 0.0m, shippFee = 0.0m; ;
         int count = gv_cart.Rows.Count;
