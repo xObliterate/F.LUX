@@ -91,11 +91,15 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
         this.Product_Price = productPrice;
     }
 
-    public ShoppingCartItem(string productID, int quantity, decimal finalPrice)
+    public ShoppingCartItem(string productID, int quantity, decimal finalPrice, Product p)
     {
         this.ItemID = productID;
         this.Product_Quantity = quantity;
         this.Product_FinalPrice = finalPrice;
+        this.Product_Name = p.gsProdName;
+        this.Product_Desc = p.gsShortDesc;
+        this.Product_Price = p.gsPrice;
+        this.Product_Image = "~/img/" + p.gsImage;
     }
 
     private int cID;
@@ -169,11 +173,11 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
     public List<ShoppingCartItem> getAllCartItem(int id)
     {
         List<ShoppingCartItem> scList = new List<ShoppingCartItem>();
-        string pID;
+        string pID, prodName, prodShortDesc, prodImage;
         int quantity;
-        decimal price;
+        decimal price, prodPrice;
 
-        string queryStr = "SELECT pID, quantity, finalPrice FROM CustomerCart WHERE cID = @cID";
+        string queryStr = "SELECT cc.pID, cc.quantity, cc.finalPrice, p.pName, p.pShortDesc, p.pPrice, pi.pImage FROM CustomerCart cc INNER JOIN Product p ON  p.pID = cc.piD INNER JOIN ProductImage pi ON pi.pID = p.pID WHERE cc.cID = @cID";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
         cmd.Parameters.AddWithValue("@cID", id);
@@ -185,8 +189,13 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
             pID = dr["pID"].ToString();
             quantity = int.Parse(dr["quantity"].ToString());
             price = decimal.Parse(dr["finalPrice"].ToString());
+            prodName = dr["pName"].ToString();
+            prodShortDesc = dr["pShortDesc"].ToString();
+            prodPrice = decimal.Parse(dr["pPrice"].ToString());
+            prodImage = dr["pImage"].ToString();
 
-            ShoppingCartItem sc = new ShoppingCartItem(pID, quantity, price);
+            Product p = new Product(prodName, prodShortDesc, prodPrice, prodImage);
+            ShoppingCartItem sc = new ShoppingCartItem(pID, quantity, price, p);
             scList.Add(sc);
         }
         con.Close();
@@ -211,6 +220,20 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
         nOfRow = cmd.ExecuteNonQuery();
         con.Close();
 
+        return nOfRow;
+    }
+
+    public int deleteCart(string pid, int cid)
+    {
+        string queryStr = "DELETE FROM CustomerCart WHERE pID = @pID AND cID = @cID";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
+        cmd.Parameters.AddWithValue("@pID", pid);
+        cmd.Parameters.AddWithValue("@cID", cid);
+
+        con.Open();
+        int nOfRow = 0;
+        nOfRow = cmd.ExecuteNonQuery();
         return nOfRow;
     }
 }

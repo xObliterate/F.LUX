@@ -35,13 +35,13 @@ public class Product
         this.shortDesc = shortDesc;
         this.price = price;
     }
-    //public Product(string prodID, string prodName, string shortDesc, decimal price)
-    //{
-    //    this.prodID = prodID;
-    //    this.prodName = prodName;
-    //    this.shortDesc = shortDesc;
-    //    this.price = price;
-    //}
+    public Product(string prodName, string shortDesc, decimal price, string image)
+    {
+        this.prodName = prodName;
+        this.shortDesc = shortDesc;
+        this.price = price;
+        this.image = image;
+    }
 
     public Product(string prodName, string shortDesc, int quantity, decimal price)
     {
