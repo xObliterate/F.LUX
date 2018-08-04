@@ -61,7 +61,7 @@ public partial class Checkout : System.Web.UI.Page
             //    lbl_prodprice.Text += string.Format("{0},", pd.gsPrice);
             //}
 
-             lbl_summary.Text = string.Format("{0} <br/> Shipping Fee ${1} <br/> {2}", order.gssubtotal, order.gsshippingfee, order.gstotal);
+            lbl_summary.Text = string.Format("Subtotal({0} items) <strong>${1}</strong> <br/> Shipping Fee <strong>${2}</strong> <br/> Total Price <strong><span style='color:#EF6C00'>${3}</span></strong>", order.gscount, order.gssubtotal, order.gsshippingfee, order.gssubtotal + order.gsshippingfee);
         }
 
 
@@ -80,11 +80,21 @@ public partial class Checkout : System.Web.UI.Page
 
     protected void btn_pay_Click(object sender, EventArgs e)
     {
+        ShoppingCartItem sc = new ShoppingCartItem();
         int cID = acc.gsID;
-        order.insertOrder(cID, add.gsAbID, decimal.Parse(order.gsshippingfee));
 
-        //iterate product properties
-        // order.insertOrderProduct();
+        order.insertOrder(cID, add.gsAbID, order.gsshippingfee);
+
+        List<Product> pList = new List<Product>();
+        pList = (List<Product>)Session["o"];
+
+        foreach (Product p in pList)
+        {
+            int pid = int.Parse(p.gsProdID);
+            order.insertOrderProduct(pid, p.gsPrice, p.gsQuantity, p.gsPrice * p.gsQuantity);
+        }
+        sc.deleteAllCart(cID);
+        Response.Redirect("Invoice.aspx");
     }
 
     protected void ccVlidator_ServerValidate(object source, ServerValidateEventArgs args)

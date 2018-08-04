@@ -39,7 +39,7 @@
                                 <asp:LinkButton ID="btn_minus" runat="server" CommandName="Minus"><i class="fas fa-minus"></i></asp:LinkButton>
                                 <%if (Session["Id"] != null)
                                     { %>
-                                <asp:TextBox ID="tb_cartQuantity" CssClass="center" Width="10%" runat="server" Text='<%# Eval("Product_Quantity") %>'></asp:TextBox>
+                                <asp:TextBox ID="tb_cartQuantity" CssClass="center" Width="10%" runat="server" AutoPostBack="true" OnTextChanged="tb_cartQuantity_TextChanged" Text='<%# Eval("Product_Quantity") %>'></asp:TextBox>
                                 <%}
                                     else
                                     {%>
@@ -47,11 +47,13 @@
                                 <%}
                                 %>
                                 <asp:LinkButton ID="btn_plus" runat="server" CommandName="Add" Text="+"><i class="fas fa-plus"></i></asp:LinkButton>
+                                <br />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
                 <div class="input-field col s12">
+                    <asp:Label ID="lbl_quantitymsg" CssClass="right" runat="server" ForeColor="Blue" Text="Sorry, you can only purchase 10 quantity MAX." Visible="false"></asp:Label>
                     <br />
                     <asp:Label ID="lbl_subtotal" CssClass="right" runat="server" Visible="false"></asp:Label>
                     <br />

@@ -12,36 +12,37 @@ using System.Configuration;
 public class Order
 {
     private string connStr = ConfigurationManager.ConnectionStrings["DBContext"].ConnectionString;
-    private string subtotal, shippingfee, total;
+    private decimal subtotal, shippingfee;
+    private int count;
 
     public Order()
     {
 
     }
 
-    public string gssubtotal
+    public decimal gssubtotal
     {
         get { return subtotal; }
         set { subtotal = value; }
     }
 
-    public string gsshippingfee
+    public decimal gsshippingfee
     {
         get { return shippingfee; }
         set { shippingfee = value; }
     }
 
-    public string gstotal
+    public int gscount
     {
-        get { return total; }
-        set { total = value; }
+        get { return count; }
+        set { count = value; }
     }
 
-    public Order(string subtotal, string shippingfee, string total)
+    public Order(decimal subtotal, decimal shippingfee, int count)
     {
         this.subtotal = subtotal;
         this.shippingfee = shippingfee;
-        this.total = total;
+        this.count = count;
     }
 
     public int insertOrder(int id, int abookid, decimal shipfee)
@@ -70,7 +71,7 @@ public class Order
     {
         int result = 0;
 
-        string queryStr = "INSERT INTO OrderProducts(orderId, pId, oProductPrice, oProductQuantity, finalPrice) VALUES((SELECT COUNT(*) FROM Order, @pID, @oProductPrice, @oProductQuantity, @finalPrice)";
+        string queryStr = "INSERT INTO OrderProducts (orderId, pId, oProductPrice, oProductQuantity, finalPrice) VALUES((SELECT MAX(orderId) FROM [Order] ), @pID, @oProductPrice, @oProductQuantity, @finalPrice)";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
         cmd.Parameters.AddWithValue("@pID", pid);

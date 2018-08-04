@@ -236,4 +236,17 @@ public class ShoppingCartItem : IEquatable<ShoppingCartItem>
         nOfRow = cmd.ExecuteNonQuery();
         return nOfRow;
     }
+
+    public int deleteAllCart(int cid)
+    {
+        string queryStr = "DELETE FROM CustomerCart WHERE cID = @cID";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
+        cmd.Parameters.AddWithValue("@cID", cid);
+
+        con.Open();
+        int nOfRow = 0;
+        nOfRow = cmd.ExecuteNonQuery();
+        return nOfRow;
+    }
 }

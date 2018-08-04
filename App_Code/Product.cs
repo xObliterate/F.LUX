@@ -43,9 +43,9 @@ public class Product
         this.image = image;
     }
 
-    public Product(string prodName, string shortDesc, int quantity, decimal price)
+    public Product(string prodID, string shortDesc, int quantity, decimal price)
     {
-        this.prodName = prodName;
+        this.prodID = prodID;
         this.shortDesc = shortDesc;
         this.quantity = quantity;
         this.price = price;
