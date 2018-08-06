@@ -6,8 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container white z-depth-2">
         <ul class="tabs teal center">
-            <li class="tab col s3"><a class="white-text active" href="Login.aspx">Login</a></li>
-            <li class="tab col s3"><a class="white-text" href="Register.aspx">Register</a></li>
+            <li class="tab col s3"><a class="white-text active" href="/Login/Login.aspx">Login</a></li>
+            <li class="tab col s3"><a class="white-text" href="/Registration/Register.aspx">Register</a></li>
         </ul>
         <div id="login" class="col s12">
             <div class="form-container">

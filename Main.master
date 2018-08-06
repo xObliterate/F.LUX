@@ -25,63 +25,144 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <!-- SideNav -->
+        <!-- SideNav-->
         <ul id="slide-out" class="sidenav">
-            <li>
-                <asp:LinkButton ID="linkbtn_Home" runat="server" PostBackUrl="~/Index.aspx">Home</asp:LinkButton></li>
-            <li>
-                <asp:LinkButton ID="linkbtn_product1" runat="server">Product</asp:LinkButton></li>
-            <li class="no-padding blue-text">
-                <ul class="collapsible collapsible-accordion">
-                    <li>
-                        <a class="collapsible-header">Rooms<i class="material-icons right">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_bedroom1" runat="server" ForeColor="#009688">Bedroom</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_office1" runat="server" ForeColor="#009688">Office</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_dining1" runat="server" ForeColor="#009688">Dining</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_kitchen1" runat="server" ForeColor="#009688">Kitchen</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_bathroom1" runat="server" ForeColor="#009688">Bathroom</asp:LinkButton></li>
-                                <li>
-                                    <asp:LinkButton ID="linkbtn_children1" runat="server" ForeColor="#009688">Children</asp:LinkButton></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <asp:LinkButton ID="linkbtn_customer1" runat="server">Customer Care</asp:LinkButton></li>
-            <li>
-                <asp:LinkButton ID="linkbtn_seller1" runat="server" PostBackUrl="~/sellerRegister.aspx" ForeColor="Orange">Sell On FLUX</asp:LinkButton></li>
-            <li>
-                <asp:LinkButton ID="linkbtn_cart1" runat="server">Cart<i class="material-icons right">shopping_cart</i></asp:LinkButton></li>
             <%if (Session["Id"] != null)
                 { %>
             <li>
-                <asp:LinkButton ID="linkbtn_profile1" runat="server" PostBackUrl="~/UserProfile.aspx"></asp:LinkButton></li>
+                <asp:LinkButton ID="LinkButton14" PostBackUrl="~/Product/ViewAllProducts.aspx" runat="server">Products</asp:LinkButton></li>
             <li>
-                <asp:LinkButton ID="btn_logout1" runat="server" OnClick="btn_logout_Click">Logout<i class="material-icons right">exit_to_app</i></asp:LinkButton></li>
+                <asp:LinkButton ID="LinkButton15" CssClass="dropdown-trigger" data-target="dropdown44" runat="server">Rooms<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
+                <ul id='dropdown44' class='dropdown-content'>
+                    <asp:LinkButton ID="LinkButton16" runat="server" ForeColor="#009688">Bedroom</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton17" runat="server" ForeColor="#009688">Office</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton18" runat="server" ForeColor="#009688">Dining</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton19" runat="server" ForeColor="#009688">Kitchen</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton20" runat="server" ForeColor="#009688">Bathroom</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton21" runat="server" ForeColor="#009688">Children</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton22" runat="server" ForeColor="#009688">Livingroom</asp:LinkButton>
+
+                </ul>
+            </li>
+            <li>
+                <asp:LinkButton ID="LinkButton23" runat="server">Customer Care</asp:LinkButton></li>
+            <li>
+                <asp:LinkButton ID="LinkButton24" PostBackUrl="~/Showroom/Showroom.aspx" runat="server">Showroom</asp:LinkButton>
+            </li>
+            <li>
+                <asp:LinkButton ID="LinkButton25" runat="server" PostBackUrl="~/ViewCart.aspx"><i class="material-icons">shopping_cart</i></asp:LinkButton></li>
+
+            <li>
+                <asp:LinkButton ID="linkbtn_profile1" runat="server" CssClass="dropdown-trigger2" data-target="dropdown22"></asp:LinkButton>
+                <ul id="dropdown22" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton27" runat="server" ForeColor="#009688" PostBackUrl="~/Profile/UserProfile.aspx">Manage Your Profile<i class="material-icons left">account_box</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton28" runat="server" ForeColor="Red" PostBackUrl="~/Profile/Favourites.aspx">Manage Your Wishlist<i class="material-icons left">favorite_outline</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton29" runat="server" ForeColor="#2196f3" PostBackUrl="~/Order/ManageOrder.aspx">Manage Your Order<i class="far fa-clipboard left"></i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton30" runat="server" ForeColor="#ef6c00" OnClick="btn_logout_Click">Logout<i class="material-icons left">exit_to_app</i></asp:LinkButton>
+                </ul>
+            </li>
             <%}
                 else if (Session["sellerId"] != null)
                 {%>
             <li>
-                <asp:LinkButton ID="linkbtn_sellerProfile1" runat="server" PostBackUrl="~/UserProfile.aspx"></asp:LinkButton></li>
+                <asp:LinkButton ID="LinkButton31" runat="server" CssClass="dropdown-trigger2" data-target="dropdown55">Products<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
+                <ul id="dropdown55" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton32" runat="server" ForeColor="Black" PostBackUrl="~/Product/ManageProduct.aspx">Manage Products</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton33" runat="server" ForeColor="Black" PostBackUrl="~/Product/AddProducts.aspx">Add Products</asp:LinkButton>
+                </ul>
+            </li>
+
             <li>
-                <asp:LinkButton ID="linkbtn_logout1" runat="server" OnClick="btn_logout_Click">Logout<i class="material-icons right">exit_to_app</i></asp:LinkButton></li>
-            <% }
+                <asp:LinkButton ID="LinkButton34" runat="server" CssClass="dropdown-trigger2" data-target="dropdown66">Orders<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
+                <ul id="dropdown66" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton35" PostBackUrl="~/Order/ManageSellerOrder.aspx" runat="server" ForeColor="Black">Manage Orders</asp:LinkButton>
+                </ul>
+            </li>
+
+            <li>
+                <asp:LinkButton ID="LinkButton36" runat="server" CssClass="dropdown-trigger2" data-target="dropdown77">Events<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
+                <ul id="dropdown77" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton37" runat="server" ForeColor="Black">Event Campaign</asp:LinkButton>
+                </ul>
+            </li>
+
+            <li>
+                <asp:LinkButton ID="linkbtn_sellerProfile1" runat="server" CssClass="dropdown-trigger2" data-target="dropdown33"></asp:LinkButton>
+                <ul id="dropdown33" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton39" runat="server" ForeColor="#009688" PostBackUrl="~/Profile/SellerProfile.aspx">Manage Your Profile<i class="material-icons left">account_box</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton40" runat="server" ForeColor="#ef6c00" OnClick="btn_logout_Click">Logout<i class="material-icons left">exit_to_app</i></asp:LinkButton>
+                </ul>
+            </li>
+            <%--                            <li>
+                                <asp:LinkButton ID="linkbtn_notification" runat="server" CssClass="dropdown-trigger2" data-target="dropdown11"><i class="material-icons right">notifications</i></asp:LinkButton>
+                                <ul id="dropdown11" class="dropdown-content">
+                                    <asp:Repeater ID="rpt_notification" runat="server">
+                                    </asp:Repeater>
+                                </ul>
+                            </li>--%>
+            <%}
+                else if (Session["admin"] != null)
+                { %>
+            <li>
+                <asp:LinkButton ID="LinkButton41" runat="server" CssClass="dropdown-trigger2" data-target="dropdown100">Customer</asp:LinkButton>
+                <ul id="dropdown100" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton42" runat="server" ForeColor="Black">Manage Customer</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton43" runat="server" PostBackUrl="~/Enquiry/AdminViewEnquiry.aspx" ForeColor="Black">View Enquiries</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton44" runat="server" PostBackUrl="~/Showroom/AdminShowroom.aspx" ForeColor="Black">View Showroom Bookings</asp:LinkButton>
+                </ul>
+            </li>
+
+            <li>
+                <asp:LinkButton ID="LinkButton45" runat="server" CssClass="dropdown-trigger2" data-target="dropdown111">Seller</asp:LinkButton>
+                <ul id="dropdown111" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton46" runat="server" ForeColor="Black">Manage Seller</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton47" PostBackUrl="~/Product/ApproveProducts.aspx" runat="server" ForeColor="Black">Approve Products</asp:LinkButton>
+                </ul>
+            </li>
+
+            <li>
+                <asp:LinkButton ID="LinkButton48" runat="server" CssClass="dropdown-trigger2" data-target="dropdown99"></asp:LinkButton>
+                <ul id="dropdown99" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton49" runat="server" ForeColor="#009688" PostBackUrl="~/Profile/adminProfile.aspx">Manage Your Profile<i class="material-icons left">supervisor_account</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton50" runat="server" ForeColor="#ef6c00" OnClick="btn_logout_Click">Logout<i class="material-icons left">exit_to_app</i></asp:LinkButton>
+                </ul>
+            </li>
+            <%}
                 else
                 { %>
             <li>
-                <asp:LinkButton ID="linkbtn_login1" runat="server" PostBackUrl="~/Login.aspx" Text="Login"></asp:LinkButton></li>
+                <asp:LinkButton ID="LinkButton51" PostBackUrl="~/Product/ViewAllProducts.aspx" runat="server">Products</asp:LinkButton></li>
+            <li>
+                <asp:LinkButton ID="LinkButton52" CssClass="dropdown-trigger" data-target="dropdown1111" runat="server">Rooms<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
+                <ul id='dropdown1111' class='dropdown-content'>
+                    <asp:LinkButton ID="LinkButton53" runat="server" ForeColor="#009688">Bedroom</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton54" runat="server" ForeColor="#009688">Office</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton55" runat="server" ForeColor="#009688">Dining</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton56" runat="server" ForeColor="#009688">Kitchen</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton57" runat="server" ForeColor="#009688">Bathroom</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton58" runat="server" ForeColor="#009688">Children</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton59" runat="server" ForeColor="#009688">Livingroom</asp:LinkButton>
+                </ul>
+            </li>
+            <li>
+                <asp:LinkButton ID="LinkButton60" PostBackUrl="~/Enquiry/FAQ.aspx" runat="server">Customer Care</asp:LinkButton></li>
+            <li>
+                <asp:LinkButton ID="LinkButton61" runat="server" ForeColor="Orange" PostBackUrl="~/Registration/sellerRegister.aspx">Sell On FLUX</asp:LinkButton></li>
+            <li>
+                <asp:LinkButton ID="LinkButton62" runat="server" PostBackUrl="~/ViewCart.aspx"><i class="material-icons">shopping_cart</i></asp:LinkButton></li>
+            <li>
+                <asp:LinkButton ID="LinkButton63" runat="server" CssClass="dropdown-trigger2" data-target="dropdown88">Login</asp:LinkButton>
+                <ul id="dropdown88" class="dropdown-content">
+                    <asp:LinkButton ID="LinkButton64" runat="server" ForeColor="Teal" PostBackUrl="~/Login/Login.aspx">Customer<i class="material-icons right">account_circle</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton65" runat="server" ForeColor="#ef6c00" PostBackUrl="~/Login/sellerLogin.aspx">Seller<i class="material-icons right">people</i></asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton66" runat="server" ForeColor="Red" PostBackUrl="~/Login/adminLogin.aspx">Admin<i class="material-icons right">supervisor_account</i></asp:LinkButton>
+                </ul>
+            </li>
+
             <%} %>
         </ul>
         <!-- Nav -->
-        <div class="navbar-fixed">
+        <div class="navbar-fixed" id="navbar">
             <nav class="teal">
                 <div class="container">
                     <div class="nav-wrapper">
@@ -93,7 +174,7 @@
                             <%if (Session["Id"] != null)
                                 { %>
                             <li>
-                                <asp:LinkButton ID="LinkButton1" runat="server">Products</asp:LinkButton></li>
+                                <asp:LinkButton ID="LinkButton1" PostBackUrl="~/Product/ViewAllProducts.aspx" runat="server">Products</asp:LinkButton></li>
                             <li>
                                 <asp:LinkButton ID="LinkButton2" CssClass="dropdown-trigger" data-target="dropdown4" runat="server">Rooms<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
                                 <ul id='dropdown4' class='dropdown-content'>
@@ -110,12 +191,17 @@
                             <li>
                                 <asp:LinkButton ID="LinkButton9" runat="server">Customer Care</asp:LinkButton></li>
                             <li>
+                                <asp:LinkButton ID="linkbtn_showroom" PostBackUrl="~/Showroom/Showroom.aspx" runat="server">Showroom</asp:LinkButton>
+                            </li>
+                            <li>
                                 <asp:LinkButton ID="LinkButton10" runat="server" PostBackUrl="~/ViewCart.aspx"><i class="material-icons">shopping_cart</i></asp:LinkButton></li>
 
                             <li>
                                 <asp:LinkButton ID="linkbtn_profile" runat="server" CssClass="dropdown-trigger2" data-target="dropdown2"></asp:LinkButton>
                                 <ul id="dropdown2" class="dropdown-content">
                                     <asp:LinkButton ID="linkbtn_viewProfile" runat="server" ForeColor="#009688" PostBackUrl="~/Profile/UserProfile.aspx">Manage Your Profile<i class="material-icons left">account_box</i></asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_favourite" runat="server" ForeColor="Red" PostBackUrl="~/Profile/Favourites.aspx">Manage Your Wishlist<i class="material-icons left">favorite_outline</i></asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_order" runat="server" ForeColor="#2196f3" PostBackUrl="~/Order/ManageOrder.aspx">Manage Your Order<i class="far fa-clipboard left"></i></asp:LinkButton>
                                     <asp:LinkButton ID="btn_logout" runat="server" ForeColor="#ef6c00" OnClick="btn_logout_Click">Logout<i class="material-icons left">exit_to_app</i></asp:LinkButton>
                                 </ul>
                             </li>
@@ -133,7 +219,7 @@
                             <li>
                                 <asp:LinkButton ID="linkbtn_sellerOrder" runat="server" CssClass="dropdown-trigger2" data-target="dropdown6">Orders<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
                                 <ul id="dropdown6" class="dropdown-content">
-                                    <asp:LinkButton ID="linkbtn_manageSellerOrder" runat="server" ForeColor="Black">Manage Orders</asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_manageSellerOrder" PostBackUrl="~/Order/ManageSellerOrder.aspx" runat="server" ForeColor="Black">Manage Orders</asp:LinkButton>
                                 </ul>
                             </li>
 
@@ -144,7 +230,6 @@
                                 </ul>
                             </li>
 
-
                             <li>
                                 <asp:LinkButton ID="linkbtn_sellerProfile" runat="server" CssClass="dropdown-trigger2" data-target="dropdown3"></asp:LinkButton>
                                 <ul id="dropdown3" class="dropdown-content">
@@ -152,20 +237,30 @@
                                     <asp:LinkButton ID="linkbtn_logout" runat="server" ForeColor="#ef6c00" OnClick="btn_logout_Click">Logout<i class="material-icons left">exit_to_app</i></asp:LinkButton>
                                 </ul>
                             </li>
-                            <li>
+                            <%--                            <li>
                                 <asp:LinkButton ID="linkbtn_notification" runat="server" CssClass="dropdown-trigger2" data-target="dropdown11"><i class="material-icons right">notifications</i></asp:LinkButton>
                                 <ul id="dropdown11" class="dropdown-content">
                                     <asp:Repeater ID="rpt_notification" runat="server">
                                     </asp:Repeater>
                                 </ul>
-                            </li>
+                            </li>--%>
                             <%}
                                 else if (Session["admin"] != null)
                                 { %>
                             <li>
-                                <asp:LinkButton ID="linkbtn_custommer" runat="server" CssClass="dropdown-trigger2" data-target="dropdown10">Customer</asp:LinkButton>
+                                <asp:LinkButton ID="linkbtn_customerr" runat="server" CssClass="dropdown-trigger2" data-target="dropdown10">Customer</asp:LinkButton>
                                 <ul id="dropdown10" class="dropdown-content">
                                     <asp:LinkButton ID="linkbtn_manageCustomer" runat="server" ForeColor="Black">Manage Customer</asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_reply" runat="server" PostBackUrl="~/Enquiry/AdminViewEnquiry.aspx" ForeColor="Black">View Enquiries</asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_adminshowroom" runat="server" PostBackUrl="~/Showroom/AdminShowroom.aspx" ForeColor="Black">View Showroom Bookings</asp:LinkButton>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <asp:LinkButton ID="LinkButton12" runat="server" CssClass="dropdown-trigger2" data-target="dropdown11">Seller</asp:LinkButton>
+                                <ul id="dropdown11" class="dropdown-content">
+                                    <asp:LinkButton ID="LinkButton13" runat="server" ForeColor="Black">Manage Seller</asp:LinkButton>
+                                    <asp:LinkButton ID="linkbtn_approveproduct" PostBackUrl="~/Product/ApproveProducts.aspx" runat="server" ForeColor="Black">Approve Products</asp:LinkButton>
                                 </ul>
                             </li>
 
@@ -180,7 +275,7 @@
                                 else
                                 { %>
                             <li>
-                                <asp:LinkButton ID="linkbtn_product" runat="server">Products</asp:LinkButton></li>
+                                <asp:LinkButton ID="linkbtn_product" PostBackUrl="~/Product/ViewAllProducts.aspx" runat="server">Products</asp:LinkButton></li>
                             <li>
                                 <asp:LinkButton ID="linkbtn_room" CssClass="dropdown-trigger" data-target="dropdown1" runat="server">Rooms<i class="material-icons right">arrow_drop_down</i></asp:LinkButton>
                                 <ul id='dropdown1' class='dropdown-content'>
@@ -194,7 +289,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <asp:LinkButton ID="linkbtn_customer" runat="server">Customer Care</asp:LinkButton></li>
+                                <asp:LinkButton ID="linkbtn_customer" PostBackUrl="~/Enquiry/FAQ.aspx" runat="server">Customer Care</asp:LinkButton></li>
                             <li>
                                 <asp:LinkButton ID="linkbtn_seller" runat="server" ForeColor="Orange" PostBackUrl="~/Registration/sellerRegister.aspx">Sell On FLUX</asp:LinkButton></li>
                             <li>

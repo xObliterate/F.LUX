@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 public partial class ViewCart : System.Web.UI.Page
 {
@@ -53,7 +54,7 @@ public partial class ViewCart : System.Web.UI.Page
             case "Favourite":
                 if (acc != null)
                 {
-
+                    //
                 }
                 else
                 {
@@ -71,6 +72,10 @@ public partial class ViewCart : System.Web.UI.Page
                     cartQuantity -= 1;
                     decimal finalprice = prod.gsPrice * cartQuantity;
 
+                    if (cartQuantity < 0)
+                    {
+                        sc.deleteCart(pID, acc.gsID);
+                    }
                     sc.updateCart(acc.gsID, int.Parse(pID), cartQuantity, finalprice -= prod.gsPrice);
                 }
                 else
@@ -152,8 +157,7 @@ public partial class ViewCart : System.Web.UI.Page
             quantity = int.Parse(tbquantity.Text);
 
             price = row.Cells[2].Text;
-            price = price.Replace("$", string.Empty);
-            subtotal += decimal.Parse(price) * quantity;
+            subtotal += decimal.Parse(price, NumberStyles.Currency) * quantity;
         }
 
         if (count > 0)
@@ -218,9 +222,8 @@ public partial class ViewCart : System.Web.UI.Page
             string desc = lbdesc.Text;
             string quantity = tbquantity.Text;
             string price = row.Cells[2].Text;
-            price = price.Replace("$", string.Empty);
 
-            Product p = new Product(pID, desc, int.Parse(quantity), decimal.Parse(price));
+            Product p = new Product(pID, desc, int.Parse(quantity), decimal.Parse(price, NumberStyles.Currency));
             list.Add(p);
         }
         Session["o"] = list;

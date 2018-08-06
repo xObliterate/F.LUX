@@ -63,7 +63,7 @@
                     </div>
                     <div class="center">
                         <asp:Button ID="btn_submit" CssClass="btn" runat="server" Text="Submit" OnClick="btn_submit_Click"></asp:Button>
-                    </div>
+                         </div>
                 </asp:Panel>
             </div>
         </div>

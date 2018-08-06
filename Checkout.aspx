@@ -50,7 +50,7 @@
                                     <asp:Button ID="btn_submit" CssClass="btn" runat="server" Text="Add" OnClick="btn_submit_Click"></asp:Button>
                                 </div>
 
-                                <asp:LinkButton ID="linkbtn_stripe" runat="server" CausesValidation="False"><i class="fab fa-cc-stripe fa-3x"></i></asp:LinkButton>
+                                <asp:LinkButton ID="linkbtn_stripe" runat="server" PostBackUrl="~/Payment/Default.aspx" CausesValidation="False"><i class="fab fa-cc-stripe fa-3x"></i></asp:LinkButton>
 
                             </div>
                         </div>

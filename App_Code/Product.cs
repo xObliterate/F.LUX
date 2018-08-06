@@ -27,12 +27,23 @@ public class Product
         this.image = image;
     }
 
+
     public Product(string prodID, string prodName, string image, string shortDesc, decimal price)
     {
         this.prodID = prodID;
         this.prodName = prodName;
         this.image = image;
         this.shortDesc = shortDesc;
+        this.price = price;
+    }
+
+    public Product(string prodID, string prodName, string image, string shortDesc, string longDesc, decimal price)
+    {
+        this.prodID = prodID;
+        this.prodName = prodName;
+        this.image = image;
+        this.shortDesc = shortDesc;
+        this.longDesc = longDesc;
         this.price = price;
     }
     public Product(string prodName, string shortDesc, decimal price, string image)
@@ -189,6 +200,19 @@ public class Product
         con.Close();
         return nofRow;
     }
+    public int productStatusUpdate(string prodid, int status)
+    {
+        string queryStr = "UPDATE Product SET pStatus = @pStatus WHERE pID = @pID";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
+        cmd.Parameters.AddWithValue("@pID", prodid);
+        cmd.Parameters.AddWithValue("@pStatus", status);
+        con.Open();
+        int nOfRow = 0;
+        nOfRow = cmd.ExecuteNonQuery();
+        con.Close();
+        return nOfRow;
+    }
 
     public int productUpdate(string id, string prodName, int quantity, decimal price)
     {
@@ -244,16 +268,16 @@ public class Product
         return result;
     }
 
-    public Product getProduct(string id)
+    public Product getProduct(string pid)
     {
         Product prod = null;
-        string prodName, prodDesc, prodID, prodImage;
+        string prodName, prodDesc, prodID, prodImage, prodlongdesc;
         decimal price;
 
-        string queryStr = "SELECT p.pID, p.pName, p.pShortDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pID = @pID";
+        string queryStr = "SELECT p.pID, p.pName, p.pShortDesc, p.pLongDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pID = @pID";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
-        cmd.Parameters.AddWithValue("@pID", id);
+        cmd.Parameters.AddWithValue("@pID", pid);
         con.Open();
         SqlDataReader dr = cmd.ExecuteReader();
 
@@ -263,9 +287,10 @@ public class Product
             prodName = dr["pName"].ToString();
             prodImage = dr["pImage"].ToString();
             prodDesc = dr["pShortDesc"].ToString();
+            prodlongdesc = dr["pLongDesc"].ToString();
             price = decimal.Parse(dr["pPrice"].ToString());
 
-            prod = new Product(prodID, prodName, prodImage, prodDesc, price);
+            prod = new Product(prodID, prodName, prodImage, prodDesc, prodlongdesc, price);
         }
         else
         {
@@ -319,7 +344,69 @@ public class Product
         string prodID, pname, pimage, pshortDesc;
         decimal price;
 
-        string queryStr = "SELECT TOP 8 p.pID, p.pName, p.pShortDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pStatus = 1";
+        string queryStr = "SELECT TOP 4 p.pID, p.pName, p.pShortDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pStatus = 1";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+
+        while (dr.Read())
+        {
+            prodID = dr["pID"].ToString();
+            pname = dr["pName"].ToString();
+            pimage = "~/img/" + dr["pImage"].ToString();
+            pshortDesc = dr["pShortDesc"].ToString();
+            price = decimal.Parse(dr["pPrice"].ToString());
+            Product prod = new Product(prodID, pname, pimage, pshortDesc, price);
+            prodList.Add(prod);
+        }
+        con.Close();
+        dr.Close();
+        dr.Dispose();
+
+        return prodList;
+    }
+
+    public List<Product> getAllProd()
+    {
+        //p.pStatus 0 = pending, 1 = approved, 2 = rejected
+
+        List<Product> prodList = new List<Product>();
+        string prodID, pname, pimage, pshortDesc;
+        decimal price;
+
+        string queryStr = "SELECT p.pID, p.pName, p.pShortDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pStatus = 1";
+        SqlConnection con = new SqlConnection(connStr);
+        SqlCommand cmd = new SqlCommand(queryStr, con);
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+
+        while (dr.Read())
+        {
+            prodID = dr["pID"].ToString();
+            pname = dr["pName"].ToString();
+            pimage = "~/img/" + dr["pImage"].ToString();
+            pshortDesc = dr["pShortDesc"].ToString();
+            price = decimal.Parse(dr["pPrice"].ToString());
+            Product prod = new Product(prodID, pname, pimage, pshortDesc, price);
+            prodList.Add(prod);
+        }
+        con.Close();
+        dr.Close();
+        dr.Dispose();
+
+        return prodList;
+    }
+
+    public List<Product> approveProducts()
+    {
+        //p.pStatus 0 = pending, 1 = approved, 2 = rejected
+
+        List<Product> prodList = new List<Product>();
+        string prodID, pname, pimage, pshortDesc;
+        decimal price;
+
+        string queryStr = "SELECT p.pID, p.pName, p.pShortDesc, pi.pImage, p.pPrice FROM Product p INNER JOIN ProductImage pi ON p.pID = pi.pID WHERE p.pStatus = 0";
         SqlConnection con = new SqlConnection(connStr);
         SqlCommand cmd = new SqlCommand(queryStr, con);
         con.Open();

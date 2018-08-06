@@ -111,11 +111,9 @@ public class Account
         cmd.Parameters.AddWithValue("@fName", fname);
         cmd.Parameters.AddWithValue("@lName", lname);
         cmd.ExecuteNonQuery();
-
         con.Close();
 
-        ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "msgbox", "alert('Update successful');window.location = 'UserProfile.aspx';", true);
-
+        ScriptManager.RegisterClientScriptBlock(page, page.GetType(), "msgbox", "alert('Update successful');window.location = '/Profile/UserProfile.aspx';", true);
     }
 
     public int updatePassword(string email, string pass)
@@ -353,7 +351,7 @@ public class Account
             cmd.ExecuteNonQuery();
             con.Close();
 
-            ScriptManager.RegisterClientScriptBlock(page, GetType(), "msgbox", "alert('Register successful');window.location = 'sellerLogin.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(page, GetType(), "msgbox", "alert('Register successful');window.location = '/Login/sellerLogin.aspx';", true);
             SendMail.sendRegistrationEmail(email, storeName, pass);
         }
     }
@@ -404,11 +402,9 @@ public class Account
             cmd.Parameters.AddWithValue("@fName", fname);
             cmd.Parameters.AddWithValue("@lName", lname);
             cmd.ExecuteNonQuery();
-
-
             con.Close();
 
-            ScriptManager.RegisterClientScriptBlock(page, GetType(), "msgbox", "alert('Register successful');window.location = 'Login.aspx';", true);
+            ScriptManager.RegisterClientScriptBlock(page, GetType(), "msgbox", "alert('Register successful');window.location = '/Login/Login.aspx';", true);
             SendMail.sendRegistrationEmail(email, fname, pass);
         }
     }
