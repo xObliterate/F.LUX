@@ -46,7 +46,7 @@ public partial class ChangePassword : System.Web.UI.Page
             if (Page.IsValid)
             {
                 acc.updatePassword(acc.gsEmail.ToString(), tb_password.Text);
-                Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Reset password success!');window.location = 'Login.aspx';", true);
+                Page.ClientScript.RegisterClientScriptBlock(GetType(), "msgbox", "alert('Reset password success!');window.location = '/Index.aspx   ';", true);
              }
         }
 

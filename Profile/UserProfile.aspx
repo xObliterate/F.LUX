@@ -17,7 +17,7 @@
                         <br />
                         <asp:Label ID="lbl_phone" runat="server"></asp:Label>
                     </div>
-                    <asp:Button ID="btn_changePw" runat="server" CssClass="btn white-text blue lighten-1 left" Text="Change password"></asp:Button>
+                    <asp:Button ID="btn_changePw" runat="server" CssClass="btn white-text blue lighten-1 left" Text="Change password" OnClick="btn_changePw_Click"></asp:Button>
                 </div>
 
             </div>

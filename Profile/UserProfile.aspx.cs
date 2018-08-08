@@ -60,4 +60,11 @@ public partial class UserProfile : System.Web.UI.Page
             Response.Redirect("AddressView.aspx");
         }
     }
+
+    protected void btn_changePw_Click(object sender, EventArgs e)
+    {
+        acc = new Account(acc.gsEmail);
+        Session["email"] = acc;
+        Response.Redirect("/Profile/ChangePassword.aspx");
+    }
 }

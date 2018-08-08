@@ -45,7 +45,7 @@
                 </ul>
             </li>
             <li>
-                <asp:LinkButton ID="LinkButton23" runat="server">Customer Care</asp:LinkButton></li>
+                <asp:LinkButton ID="LinkButton23" PostBackUrl="~/Enquiry/FAQ.aspx" runat="server">Customer Care</asp:LinkButton></li>
             <li>
                 <asp:LinkButton ID="LinkButton24" PostBackUrl="~/Showroom/Showroom.aspx" runat="server">Showroom</asp:LinkButton>
             </li>
