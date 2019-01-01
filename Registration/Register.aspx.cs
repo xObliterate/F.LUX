@@ -36,14 +36,16 @@ public partial class Register : System.Web.UI.Page
 
     protected void phoneValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
-        if (InputValidation.ValidatePhone(args.Value) == true)
-        {
-            args.IsValid = true;
-        }
-        else
-        {
-            args.IsValid = false;
-        }
+        bool pass = (InputValidation.ValidatePhone(args.Value) == true) ? true : false;
+        args.IsValid = pass;
+        //if (InputValidation.ValidatePhone(args.Value) == true)
+        //{
+        //    args.IsValid = true;
+        //}
+        //else
+        //{
+        //    args.IsValid = false;
+        //}
     }
 
     protected void passValidator_ServerValidate(object source, ServerValidateEventArgs args)

@@ -62,8 +62,6 @@ public class InputValidation
             ClearInputs(ctrl.Controls);
         }
     }
-    //////
-
 
     public static bool IsValidCvv(string Cvv)
     {
